@@ -1,0 +1,4 @@
+#!/bin/bash
+source `dirname $0`/env
+sudo cp /usr/bin/qemu-aarch64-static $onl_root/usr/bin
+sudo chroot $onl_root /bin/bash --login

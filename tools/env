@@ -1,0 +1,35 @@
+#!/bin/sh
+
+dest_dir=~/Downloads #file output path
+
+owner=`whoami`
+if [ "$owner" == "root" ];then
+    owner=`ls -l Makefile|awk '{print $3}'`
+fi
+
+work_dir=`pwd`
+build_dir=$work_dir/build
+
+uboot_dir=$work_dir/src/uboot
+uboot_build=$build_dir/uboot
+uboot_config=$uboot_build/.config
+
+linux_dir=$work_dir/src/linux
+linux_build=$build_dir/linux
+linux_config=$linux_build/.config
+linux_dtb=$linux_build/arch/arm64/boot/dts/centec/e530-24x2c.dtb
+zimage=$linux_build/arch/arm64/boot/Image.gz
+
+machine=cncr_ctn4200
+onie_ver=0
+machine_ver=$machine-r$onie_ver
+onie_dir=$work_dir/onie
+onie_build=$onie_dir/build
+onie_crosstool=$onie_build/crosstool-ng
+onie_root=$onie_build/$machine_ver/sysroot
+onie_overlay=$onie_dir/fsoverlay
+onie_dl=$onie_build/download
+
+onl_dir=$work_dir/onl
+onl_root=$onl_dir/builds/arm64/rootfs/builds/stretch/rootfs-arm64.d
+onl_overlay=$onl_dir/fsoverlay
